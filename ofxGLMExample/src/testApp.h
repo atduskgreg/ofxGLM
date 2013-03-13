@@ -23,4 +23,6 @@ class testApp : public ofBaseApp {
 		void gotMessage(ofMessage msg);
     
     ofMesh mesh;
+    
+    ofImage noise;
 };

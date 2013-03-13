@@ -3,6 +3,15 @@ using namespace ofxGLM;
 
 //--------------------------------------------------------------
 void testApp::setup(){
+    // use glm perlin noise
+    noise.allocate(200, 200, OF_IMAGE_GRAYSCALE);
+    for(int x = 0; x < 200; x++){
+        for(int y = 0; y < 200; y++){
+            int i = x + y * 200;
+            noise.getPixelsRef()[i] = ofMap( glm::perlin(glm::vec2(x/16.0f,y/16.0f)), -1, 1, 0, 255 );
+        }
+    }
+    noise.update();
     
 }
 
@@ -38,6 +47,10 @@ void testApp::draw(){
     ofLine(0,0,0, glmv.x, glmv.y, glmv.z);
     ofPopStyle();
     ofPopMatrix();
+    
+
+    // draw perlin noise image
+    noise.draw(ofGetWidth() - 200, ofGetHeight()-200, 200, 200);
 }
 
 //--------------------------------------------------------------
